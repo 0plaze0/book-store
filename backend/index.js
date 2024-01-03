@@ -5,10 +5,14 @@ import { PORT } from "./config/port.js";
 import connectDB, { dbURI } from "./config/dbConn.js";
 import router from "./routes/api/book.js";
 
+const app = express();
+
 //connection to database
 connectDB(dbURI);
 
-const app = express();
+//middleware
+
+app.use(express.json());
 
 app.use("/", router);
 
