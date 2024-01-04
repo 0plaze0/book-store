@@ -5,9 +5,7 @@ const router = express.Router();
 
 router
   .route("/book")
-  .get((req, res) => {
-    res.status(200).send("Hello");
-  })
+  .get(bookController.getAllBook)
   .post(bookController.createBook);
 
 export default router;
