@@ -8,4 +8,6 @@ router
   .get(bookController.getAllBook)
   .post(bookController.createBook);
 
+router.route("/book/:id").get(bookController.getBook);
+
 export default router;
