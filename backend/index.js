@@ -1,9 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 
 import { PORT } from "./config/port.js";
 import connectDB, { dbURI } from "./config/dbConn.js";
 import router from "./routes/api/book.js";
+import corsOptions from "./config/corsOptions.js";
 
 const app = express();
 
@@ -11,7 +13,8 @@ const app = express();
 connectDB(dbURI);
 
 //middleware
-
+app.use(cors(corsOptions));
+//middleware
 app.use(express.json());
 
 app.use("/", router);
