@@ -74,4 +74,16 @@ const getBook = async (req, res) => {
   }
 };
 
-export default { createBook, getAllBook, getBook, updateBook };
+const deleteBook = async (req, res) => {
+  const { id } = req.params;
+  if (!id) return res.status(400).send({ message: "Please enter valid ID" });
+  try {
+    const result = await Book.deleteOne({ _id: id });
+    res.status(200).json({ message: "successfully deleted book", result });
+  } catch (err) {
+    console.error(err.msg);
+    res.status(500).send({ messsage: err.msg });
+  }
+};
+
+export default { createBook, getAllBook, getBook, updateBook, deleteBook };
