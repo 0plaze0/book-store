@@ -25,11 +25,36 @@ const createBook = async (req, res) => {
     publishYear: req.body.publishYear,
   };
   try {
-    const result = await Book.create(newBook);
-    res.status(200).send(result);
+    const book = await Book.create(newBook);
+    res.status(200).send(book);
   } catch (err) {
     console.log(err.msg);
     res.status(500).send({ message: err.message });
+  }
+};
+
+const updateBook = async (req, res) => {
+  const { id } = req.params;
+  if (!id) return res.status(400).send({ message: "please enter valid ID" });
+  try {
+    const book = await Book.findById(id);
+
+    if (!book)
+      return res
+        .status(404)
+        .send({ message: "cannot find book with the given ID" });
+    const { title, author, publishYear } = req.body;
+
+    if (req.body.title) book.title = title;
+    if (req.body.author) book.author = author;
+    if (req.body.publishYear) book.publishYear = publishYear;
+
+    const result = await book.save();
+    res.status(200).json({ message: "Book saved succesfully", result });
+  } catch (err) {
+    console.error(err.msg);
+    console.log("catch");
+    res.status(500).send({ message: err.msg });
   }
 };
 
@@ -49,4 +74,4 @@ const getBook = async (req, res) => {
   }
 };
 
-export default { createBook, getAllBook, getBook };
+export default { createBook, getAllBook, getBook, updateBook };

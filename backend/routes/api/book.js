@@ -8,6 +8,9 @@ router
   .get(bookController.getAllBook)
   .post(bookController.createBook);
 
-router.route("/books/:id").get(bookController.getBook);
+router
+  .route("/books/:id")
+  .get(bookController.getBook)
+  .put(bookController.updateBook);
 
 export default router;
