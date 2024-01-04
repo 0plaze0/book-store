@@ -16,16 +16,15 @@ const getAllBook = async (req, res) => {
 };
 
 const createBook = async (req, res) => {
+  if (!req.body.title || !req.body.author || !req.body.publishYear) {
+    return res.status(400).send({ message: "Please Enter valid data" });
+  }
+  const newBook = {
+    title: req.body.title,
+    author: req.body.author,
+    publishYear: req.body.publishYear,
+  };
   try {
-    if (!req.body.title || !req.body.author || !req.body.publishYear) {
-      return res.status(400).send({ message: "Please Enter valid data" });
-    }
-    const newBook = {
-      title: req.body.title,
-      author: req.body.author,
-      publishYear: req.body.publishYear,
-    };
-
     const result = await Book.create(newBook);
     res.status(200).send(result);
   } catch (err) {
