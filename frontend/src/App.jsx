@@ -1,8 +1,19 @@
+import { Route, Routes } from "react-router-dom";
+
 import "./App.css";
+import { CreateBook, ShowBook, EditBook, DeleteBook, Home } from "./container";
 
 function App() {
   return (
-    <h1 className="bg-red-400 text-3xl font-bold underline">Hello world!</h1>
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/books/create" element={<CreateBook />} />
+        <Route path="/books/details/:id" element={<ShowBook />} />
+        <Route path="/books/edit/:id" element={<EditBook />} />
+        <Route path="/books/delete/:id" element={<DeleteBook />} />
+      </Routes>
+    </div>
   );
 }
 
