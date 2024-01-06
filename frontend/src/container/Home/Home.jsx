@@ -7,9 +7,9 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await bookApi.get("/books");
+      const response = await bookApi.get("/books");
 
-      setBooks(data.data.book);
+      setBooks(response.data.book);
     };
     fetchData();
   }, []);
