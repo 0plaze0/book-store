@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
     <div className="p-4">
-      <div className="flex justify-content items-center">
+      <div className="flex justify-between items-center">
         <div className="text-3xl my-8">Books List</div>
         <Link to="/books/create">
           <MdOutlineAddBox className="text-sky-800 text-4xl" />
