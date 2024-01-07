@@ -67,7 +67,7 @@ const getBook = async (req, res) => {
       return res
         .status(404)
         .send({ message: "cannot find book with the given ID" });
-    res.status(400).send(result);
+    res.status(200).send(result);
   } catch (err) {
     console.err(err.msg);
     res.status(500).send({ message: err.msg });
