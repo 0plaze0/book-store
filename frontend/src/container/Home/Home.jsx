@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { MdOutlineAddBox } from "react-icons/md";
 
 import { Spinner, BookList, BookCard } from "./../../components";
 import bookApi from "../../api/bookApi";
+import ToogleContext from "../../context/Toogle";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [toogle, setToogle] = useState("table");
+  const { toogle, setToogle } = useContext(ToogleContext);
+
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
