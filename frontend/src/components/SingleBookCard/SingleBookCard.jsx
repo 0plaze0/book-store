@@ -1,11 +1,16 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import { PiBookOpenTextLight } from "react-icons/pi";
-import { BiUserCircle } from "react-icons/bi";
+import { BiShow, BiUserCircle } from "react-icons/bi";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
 
+import BookModal from "../BookModal/BookModal";
+
 const SingleBookCard = ({ book }) => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className="border-2 border-gray-700 rounded-md px-4 py-2 m-4 relative hover:shadow-md ">
       <div className="flex">
@@ -25,6 +30,10 @@ const SingleBookCard = ({ book }) => {
         </div>
       </div>
       <div className="flex gap-x-4 justify-around m-4">
+        <BiShow
+          className="text-xl text-black-400"
+          onClick={() => setShowModal(true)}
+        />
         <Link to={`/books/details/${book._id}`}>
           <BsInfoCircle className="text-xl text-blue-400" />
         </Link>
@@ -35,6 +44,9 @@ const SingleBookCard = ({ book }) => {
           <MdOutlineDelete className="text-xl text-red-400" />
         </Link>
       </div>
+      {showModal && (
+        <BookModal book={book} onClose={() => setShowModal(false)} />
+      )}
     </div>
   );
 };
