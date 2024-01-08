@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 import { BackButton, Spinner } from "./../../components";
 import bookApi from "./../../api/bookApi";
@@ -10,6 +11,7 @@ const CreateBook = () => {
   const [author, setAuthor] = useState("");
   const [publishYear, setPublishYear] = useState("");
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,9 +24,11 @@ const CreateBook = () => {
     try {
       await bookApi.post("./books", data);
       setLoading(false);
+      enqueueSnackbar("Book added successfully", { variant: "success" });
       navigate("/");
     } catch (err) {
       console.log(err.message);
+      enqueueSnackbar("Error", { variant: "error" });
     }
   };
   return (

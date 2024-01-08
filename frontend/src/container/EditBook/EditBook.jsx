@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { BackButton, Spinner } from "./../../components";
 import bookApi from "./../../api/bookApi";
+import { useSnackbar } from "notistack";
 
 const EditBook = () => {
   const [loading, setLoading] = useState(false);
@@ -11,6 +12,7 @@ const EditBook = () => {
   const [publishYear, setPublishYear] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     setLoading(true);
@@ -20,9 +22,11 @@ const EditBook = () => {
         setTitle(response.data.title);
         setAuthor(response.data.author);
         setPublishYear(response.data.publishYear);
+
         setLoading(false);
       } catch (err) {
         console.log(err.msg);
+        enqueueSnackbar("Error", { variant: "error" });
       }
     };
     fetchData();
@@ -39,6 +43,7 @@ const EditBook = () => {
     try {
       await bookApi.put(`./books/${id}`, data);
       setLoading(false);
+      enqueueSnackbar("Book Updated Succesfully", { variant: "success" });
       navigate("/");
     } catch (err) {
       console.log(err.message);

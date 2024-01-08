@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 import { BackButton, Spinner } from "./../../components";
 import bookApi from "./../../api/bookApi";
@@ -8,6 +9,7 @@ const DeleteBook = () => {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -15,9 +17,11 @@ const DeleteBook = () => {
     try {
       await bookApi.delete(`./books/${id}`);
       setLoading(false);
+      enqueueSnackbar("Book Deleted Successfully", { variant: "success" });
       navigate("/");
     } catch (err) {
       console.log(err.message);
+      enqueueSnackbar("Error", { variant: "error" });
       alert("An error has occured");
     }
   };
