@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import "dotenv/config";
 
-export const dbURI = "mongodb://127.0.0.1:27017/";
+export const dbURI = process.env.DB_URI;
 
 const connectDB = async (dbURI) => {
   try {
