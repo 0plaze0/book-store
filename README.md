@@ -17,7 +17,7 @@ A web application to store the list of book in your store, home, libraries etc.
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [Built with](#built-with)
-- [Local Development](#Local development)
+- [Local Development](#local-development)
 - [Contribution](#Contributing)
 
 ## Overview
