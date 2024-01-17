@@ -1,4 +1,8 @@
-const whitelist = ["http://localhost:3500", "http://localhost:5173"];
+const whitelist = [
+  "http://localhost:3500",
+  "http://localhost:5173",
+  "https://book-store-frontend-a3i6.onrender.com/",
+];
 
 const corsOptions = {
   origin: (origin, callback) => {
